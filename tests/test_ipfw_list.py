@@ -3,7 +3,7 @@ import sys
 import pathlib
 import subprocess
 current_dir = pathlib.Path(__file__).resolve().parent
-sys.path.append( str(current_dir) + '/../backend/' )
+sys.path.append( str(current_dir) + '/../libipfw/' )
 import ipfw_list
 
 class TestIPFWList(unittest.TestCase):
