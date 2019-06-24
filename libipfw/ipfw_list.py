@@ -16,7 +16,7 @@ class IPFW_List:
         output, error = p.communicate()
         return [line.decode("UTF-8") for line in output.splitlines()]
 
-    def results(self) -> None:
+    def results(self) -> list:
         p = subprocess.Popen(ipfw_cmd.IPFW_CMD + " " + self.LIST_CMD,
                              shell=True, stdout=subprocess.PIPE)
         output, error = p.communicate()
