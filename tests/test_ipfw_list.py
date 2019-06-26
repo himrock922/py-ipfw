@@ -12,7 +12,6 @@ class TestIPFWList(unittest.TestCase):
         CMD: str = "/sbin/ipfw list"
         p = subprocess.Popen(CMD, shell=True, stdout=subprocess.PIPE)
         output, error = p.communicate()
-        lists = []
         lists = [line.decode("UTF-8") for line in output.splitlines()]
         test_results = ipfw_list.IPFW_List()
         self.assertEqual(lists, test_results.results())

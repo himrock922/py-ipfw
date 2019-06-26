@@ -6,5 +6,7 @@ task:
     - pkg update
     - pkg install -y python37
     - sysrc firewall_enable=YES
+    - pkg install -y nmap
+    - nmap localhost -p 1-65535
   script:
     - python3.7 tests/test_ipfw_list.py
