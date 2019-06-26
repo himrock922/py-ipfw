@@ -11,4 +11,5 @@ task:
     - service ipfw restart
 
   script:
+    - ipfw list
     - python3.7 tests/test_ipfw_list.py
