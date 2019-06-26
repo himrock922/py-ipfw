@@ -6,6 +6,9 @@ task:
     - pkg update
     - pkg install -y python37
     - sysrc firewall_enable=YES
-    - netstat -an
+    - echo '${fwcmd} add 1100 allow tcp from any to any 80 setup' >> /etc/rc.firewall
+    - echo '${fwcmd} add 1200 allow tcp from any to any 8239 setup' >> /etc/rc.firewall
+    - service ipfw restart
+
   script:
     - python3.7 tests/test_ipfw_list.py
