@@ -6,7 +6,7 @@ task:
     - pkg update
     - pkg install -y python37
     - sysrc firewall_enable=YES
-    - echo '${fwcmd} add 64000 allow ip from any to any' >> /etc/rc.firewall
+    - echo '${fwcmd} add 64000 allow ip from any to any' > /etc/rc.firewall
     - kldload ipfw
     - service ipfw restart
 
