@@ -9,15 +9,12 @@ import ipfw_list
 class TestIPFWList(unittest.TestCase):
 
     def test_ipfw_list(self):
-        print(sys.path)
-        CMD: str = "/sbin/ipfw -a list"
+        CMD: str = "/sbin/ipfw list"
         p = subprocess.Popen(CMD, shell=True, stdout=subprocess.PIPE)
         output, error = p.communicate()
-        lists = []
-        for line in output.splitlines():
-            lists.append(line.decode("UTF-8"))
+        lists = [line.decode("UTF-8") for line in output.splitlines()]
         test_results = ipfw_list.IPFW_List()
-        self.assertEqual(lists, test_results.all_results())
+        self.assertEqual(lists, test_results.results())
 
 
 if __name__ == "__main__":

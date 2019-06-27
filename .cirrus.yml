@@ -6,5 +6,10 @@ task:
     - pkg update
     - pkg install -y python37
     - sysrc firewall_enable=YES
+    - echo '${fwcmd} add 64000 allow all from any to any' >> /etc/rc.firewall
+    - kldload ipfw
+    - service ipfw restart
+
   script:
+    - ipfw list
     - python3.7 tests/test_ipfw_list.py
