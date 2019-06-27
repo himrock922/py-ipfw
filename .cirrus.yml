@@ -9,7 +9,7 @@ task:
     - echo 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
     - echo '${fwcmd} add 1100 allow all from any to any' >> /etc/rc.firewall
     - kldload ipfw
-    - service ipfw restart
+    - service ipfw start
 
   script:
     - ipfw list
