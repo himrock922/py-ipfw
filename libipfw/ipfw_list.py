@@ -1,5 +1,5 @@
 """exec command with ipfw list."""
-import ipfw_cmd
+from libipfw import ipfw_cmd
 import subprocess
 
 
