@@ -1,10 +1,8 @@
 import unittest
-import sys
-import pathlib
+import os, sys
 import subprocess
-current_dir = pathlib.Path(__file__).resolve().parent
-sys.path.append( str(current_dir) + '/../libipfw/' )
-import ipfw_list
+sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
+from libipfw import ipfw_list
 
 class TestIPFWList(unittest.TestCase):
 
