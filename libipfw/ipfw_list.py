@@ -21,3 +21,9 @@ class IPFW_List:
                              shell=True, stdout=subprocess.PIPE)
         output, error = p.communicate()
         return [line.decode("UTF-8") for line in output.splitlines()]
+
+    def add(self) -> None:
+        p = subprocess.Popen(ipfw_cmd.IPFW_CMD + " " + "add",
+                            shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, error = p.communicate()
+        print(error.decode("UTF-8"))
