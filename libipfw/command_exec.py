@@ -1,5 +1,6 @@
 """exec command with ipfw list."""
 from libipfw import cmd, errors
+import shlex
 import subprocess
 
 
@@ -11,21 +12,20 @@ class IPFW:
 
     def all_results(self) -> list:
         all_option: str = "-a"
-        p = subprocess.Popen(cmd.IPFW_CMD + " " + all_option +
-                             " " + self.LIST_CMD,
-                             shell=True, stdout=subprocess.PIPE)
+        command: str = cmd.IPFW_CMD + " " + all_option + " " + self.LIST_CMD
+        p = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = p.communicate()
         return [line.decode("UTF-8") for line in output.splitlines()]
 
     def results(self) -> list:
-        p = subprocess.Popen(cmd.IPFW_CMD + " " + self.LIST_CMD,
-                             shell=True, stdout=subprocess.PIPE)
+        command: str = cmd.IPFW_CMD + " " + self.LIST_CMD
+        p = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = p.communicate()
         return [line.decode("UTF-8") for line in output.splitlines()]
 
-    def add(self) -> None:
-        p = subprocess.Popen(cmd.IPFW_CMD + " " + self.ADD_CMD,
-                            shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    def add(self, parameter: str) -> None:
+        command: str = cmd.IPFW_CMD + " " + self.ADD_CMD + " " + parameter
+        p = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = p.communicate()
-        if error is not None:
+        if error.decode("UTF-8"):
             raise errors.AddExecError(message=error.decode("UTF-8"))
