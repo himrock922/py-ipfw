@@ -9,6 +9,7 @@ class IPFW:
     def __init__(self):
         self.LIST_CMD: str = "list"
         self.ADD_CMD: str = "add"
+        self.DELETE_CMD: str = "delete"
 
     def all_results(self) -> list:
         all_option: str = "-a"
@@ -25,6 +26,13 @@ class IPFW:
 
     def add(self, parameter: str) -> None:
         command: str = cmd.IPFW_CMD + " " + self.ADD_CMD + " " + parameter
+        p = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output, error = p.communicate()
+        if error.decode("UTF-8"):
+            raise errors.AddExecError(message=error.decode("UTF-8"))
+
+    def delete(self, parameter: str) -> None:
+        command: str = cmd.IPFW_CMD + " " + self.DELETE_CMD + " " + parameter
         p = subprocess.Popen(shlex.split(command), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         output, error = p.communicate()
         if error.decode("UTF-8"):
