@@ -9,6 +9,8 @@ task:
     - echo 'firewall_type="open"' >> /etc/rc.conf
     - echo 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
     - kldload ipfw
+    - echo 'ipfw add 100 allow ip from any to any 22 in via vtnet0' >> /etc/rc.firewall
+    - echo 'ipfw add 101 allow ip from any 22 to any out via vtnet0' >> /etc/rc.firewall
     - service ipfw start
 
   script:
