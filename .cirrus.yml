@@ -4,12 +4,12 @@ freebsd_instance:
 task:
   install_script:
     - pkg update
-    - pkg install -y python37 tmux
+    - pkg install -y python37
     - sysrc firewall_enable=YES
     - echo 'firewall_type="open"' >> /etc/rc.conf
     - echo 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
     - kldload ipfw
-    - ifconfig
+    - echo 'ipfw add 100 allow all from any to any' >> /etc/rc.firewall
     - service ipfw start
 
   script:
