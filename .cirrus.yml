@@ -9,8 +9,7 @@ task:
     - echo 'firewall_type="open"' >> /etc/rc.conf
     - echo 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
     - kldload ipfw
-    - echo 'ipfw add 301 allow all from any to any' >> /etc/rc.firewall
-    - service ipfw start
+    - reboot
 
   script:
     - ipfw list
