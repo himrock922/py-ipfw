@@ -15,8 +15,8 @@ task:
     - ifconfig epair0a 192.168.0.254/24 up
   qjail_script:
     - qjail install
-    - qjail create -4 192.168.0.2 jail1
-    - qjail config -w bridge0 -v ipfw jail1
+    - qjail create -n lo0 -4 127.0.0.1 jail1
+    - cp jail_setting.txt /usr/local/etc/qjail.config/jail
     - qjail start jail1
     - ifconfig -a
   script:
