@@ -16,7 +16,7 @@ task:
   qjail_script:
     - ifconfig epair create
     - ifconfig epair1b up
-    - ifconfig brdige0 addm epair1b
+    - ifconfig bridge0 addm epair1b
     - qjail install
     - qjail create -n lo0 -4 127.0.0.1 jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail
