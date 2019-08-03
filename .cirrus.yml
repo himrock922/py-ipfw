@@ -5,10 +5,19 @@ task:
   install_script:
     - pkg update
     - pkg install -y qjail
+  networking_script:
+    - sysctl net.inet.ip.forwarding=1
+    - ifconfig bridge create
+    - ifconfig brdige0 192.168.0.1/24
+    - ifconfig epair create
+    - ifconfig epair0b
+    - ifconfig bridge0 addm epair0b
+    - ifconfig epair0a 192.168.0.254/24 up
+    - route add -net 192.168.0.0/24 192.168.0.1
   qjail_script:
     - qjail install
     - qjail create -4 192.168.0.2 jail1
-    - qjail config -w vtnet0 -v ipfw jail1
+    - qjail config -w brdige0 -v ipfw jail1
     - qjail start jail1
     - ifconfig -a
   script:
