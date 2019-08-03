@@ -10,10 +10,13 @@ task:
     - ifconfig bridge create
     - ifconfig bridge0 192.168.0.1/24 up
     - ifconfig epair create
-    - ifconfig epair0b
+    - ifconfig epair0b up
     - ifconfig bridge0 addm epair0b
     - ifconfig epair0a 192.168.0.254/24 up
   qjail_script:
+    - ifconfig epair create
+    - ifconfig epair1b up
+    - ifconfig brdige0 addm epair1b
     - qjail install
     - qjail create -n lo0 -4 127.0.0.1 jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail
