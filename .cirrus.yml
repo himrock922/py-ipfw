@@ -17,12 +17,12 @@ task:
     - ifconfig epair create
     - ifconfig epair1b up
     - ifconfig bridge0 addm epair1b
+    - ifconfig
     - qjail install
     - qjail create -n lo0 -4 127.0.0.1 jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail
-    - qjail start jail1
-    - ifconfig -a
   script:
+    - qjail start jail1
     - qjail console jail1
     - ifconfig -a
     - ipfw list
