@@ -2,34 +2,17 @@ freebsd_instance:
   image: freebsd-12-0-release-amd64
 
 task:
-  jail_cache:
-    folder: /jails/jail1
-    populate_script:
-      - mkdir -p /jails/jail1
-      - cd /usr/src
-      - make buildworld
-      - make installworld DESTDIR=/jails/jail1
-      - make distribution DESTDIR=/jails/jail1
-      - mount -t devfs devfs /jails/jail1/dev
-      - jail -c vnet name=jail1 host.hostname=jail1 path=/jails/jail1/ persist
-  networking_script:
-    - sysctl net.inet.ip.forwarding=1
-    - ifconfig bridge create
-    - ifconfig bridge0 192.168.0.1/24 up
-    - ifconfig epair create
-    - ifconfig epair0b up
-    - ifconfig bridge0 addm epair0b
-    - ifconfig epair0a 192.168.0.254/24 up
-    - route add -net 192.168.0.0/24 192.168.0.1
-    - ifconfig epair create
-    - ifconfig epair1b up
-    - ifconfig brdige0 addm epair1b
-    - ifconfig epair1a vnet jail1
-    - jexec 1 ifconfig epair1a 192.168.0.2/24 up
-    - jexec 1 route add default 192.168.0.1
+  install_script:
+    - pkg update
+    - pkg install -y qjail
+  qjail_script:
+    - qjail install
+    - qjail create -4 192.168.0.2 jail1
+    - qjail config -w vtnet0 -v ipfw jail1
+    - qjail start jail1
+    - ifconfig -a
   script:
-    - jexec 1 csh
-    - sysrc firewall_enable=YES
-    - echo 'firewall_type="open"' >> /etc/rc.conf
-    - echo 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
+    - qjail console jail1
+    - ifconfig -a
     - ipfw list
+    - exit
