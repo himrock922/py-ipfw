@@ -2,7 +2,7 @@ jail1 {
 host.hostname       =  "jail1";
 path                =  "/usr/jails/jail1";
 mount.fstab         =  "/usr/local/etc/qjail.fstab/jail1";
-exec.consolelog     =  "/var/log/qjail.www.console.log";
+exec.consolelog     =  "/var/log/qjail.jail1.console.log";
 mount.devfs;
 devfs_ruleset       =  "4";
 vnet                =  "new";

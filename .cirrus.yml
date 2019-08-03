@@ -23,8 +23,9 @@ task:
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
   script:
+    - qjail list
     - qjail start jail1
-    - qjail console jail1
+    - jexec jail1 csh
     - ifconfig -a
     - ipfw list
     - exit
