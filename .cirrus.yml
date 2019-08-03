@@ -4,7 +4,7 @@ freebsd_instance:
 task:
   jail_cache:
     folder: /jails/jail1
-    setting_script:
+    populate_script:
       - mkdir -p /jails/jail1
       - cd /usr/src
       - make buildworld
