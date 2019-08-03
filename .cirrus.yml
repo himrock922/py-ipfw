@@ -27,5 +27,9 @@ task:
     - qjail start jail1
     - jexec jail1 csh
     - ifconfig -a
+    - sysrc firewall_enable=YES
+    - echo 'firewall_type="open"' >> /etc/rc.conf
+    - echo 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
+    - service ipfw start
     - ipfw list
     - exit
