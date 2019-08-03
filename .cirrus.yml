@@ -16,7 +16,7 @@ task:
   qjail_script:
     - qjail install
     - qjail create -4 192.168.0.2 jail1
-    - qjail config -w brdige0 -v ipfw jail1
+    - qjail config -w bridge0 -v ipfw jail1
     - qjail start jail1
     - ifconfig -a
   script:
