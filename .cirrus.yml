@@ -6,26 +6,16 @@ task:
     - pkg update
     - pkg install -y qjail
   networking_script:
-    - sysctl net.inet.ip.forwarding=1
-    - ifconfig bridge create
-    - ifconfig bridge0 192.168.0.1/24 up
-    - ifconfig epair0 create
-    - ifconfig epair0b up
-    - ifconfig bridge0 addm vtnet0 addm epair0b
+    - ifconfig vtnet0 192.168.0.254/24 alias
   qjail_script:
     - ifconfig
     - qjail install
-    - qjail create -n lo0 -4 127.0.0.1 jail1
-    - cat /usr/local/etc/qjail.config/jail1
-    - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
+    - qjail create -4 192.68.0.2 jail1
+    - qjail config -w vtnet0 -v ipfw jail1
   script:
     - qjail list
     - qjail start jail1
-    - jexec jail1 csh
+    - qjail console jail1
     - ifconfig -a
-    - sysrc firewall_enable=YES
-    - echo 'firewall_type="open"' >> /etc/rc.conf
-    - echo 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
-    - service ipfw start
     - ipfw list
     - exit
