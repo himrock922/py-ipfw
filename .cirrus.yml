@@ -6,14 +6,16 @@ task:
     - pkg update
     - pkg install -y qjail
   networking_script:
-    - ifconfig vtnet1 create
-    - ifconfig -a
-    - ifconfig vtnet1 192.168.0.254/24 up
+    - ifconfig bridge0 create
+    - ifconfig bridge0 192.168.0.1/24 up
+    - ifconfig epair create
+    - ifconfig bridge0 addm vtnet0
+    - ifconfig bridge0 addm epair0a
   qjail_script:
     - ifconfig
     - qjail install
-    - qjail create -4 192.168.0.2 jail1
-    - qjail config -w vtnet1 -v ipfw jail1
+    - qjail create -n lo0 -4 127.0.0.1 jail1
+    - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
   script:
     - qjail list
     - qjail start jail1
