@@ -23,7 +23,9 @@ task:
   script:
     - qjail list
     - qjail start jail1
-    - qjail console jail1
-    - ifconfig -a
-    - ipfw list
-    - exit
+    - jexec jail1 ifconfig
+    - jexec jail1 sysrc ipfw_enable=YES
+    - jexec jail1 'firewall_type="open"' >> /etc/rc.conf
+    - jexec jail1 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
+    - jexec jail1 service ipfw start
+    - jexec jail1 ipfw list
