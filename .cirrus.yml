@@ -6,7 +6,8 @@ task:
     - pkg update
     - pkg install -y qjail
   networking_script:
-    - ifconfig bridge0 create
+    - sysctl net.inet.ip.forwarding=1
+    - ifconfig bridge create
     - ifconfig bridge0 192.168.0.1/24 up
     - ifconfig epair create
     - ifconfig bridge0 addm vtnet0
