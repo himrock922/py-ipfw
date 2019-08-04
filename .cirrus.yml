@@ -9,7 +9,7 @@ task:
     - sysctl net.inet.ip.forwarding=1
     - ifconfig bridge create
     - ifconfig bridge0 192.168.0.1/24 up
-    - ifconfig epair create
+    - ifconfig epair0 create
     - ifconfig epair0b up
     - ifconfig bridge0 addm vtnet0 addm epair0b
   qjail_script:
