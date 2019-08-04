@@ -31,7 +31,7 @@ task:
     - jexec jail1 sysrc firewall_enable=YES
     - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
     - jexec jail1 service ipfw start
-    - jexec jail1 ipfw add 65000 all from any to any
+    - jexec jail1 ipfw add 65000 allow all from any to any
     - jexec jail1 ipfw list
     - jexec jail1 echo 'nameserver 8.8.8.8' > /etc/resolv.conf
     - jexec jail1 pkg install -y git
