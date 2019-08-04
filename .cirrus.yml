@@ -32,4 +32,5 @@ task:
     - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
     - jexec jail1 service ipfw start
     - jexec jail1 ipfw list
+    - jexec jail1 echo 'nameserver 8.8.8.8' >> /etc/resolv.conf
     - jexec jail1 pkg install -y git
