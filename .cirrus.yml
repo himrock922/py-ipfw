@@ -8,8 +8,6 @@ task:
   networking_script:
     - sysctl net.inet.ip.forwarding=1
     - sysctl security.jail.allow_raw_sockets=1
-    - echo 'net.inet.ip.fw.enable=0' >> /etc/sysctl.conf
-    - kldload ipfw
     - ifconfig bridge create
     - ifconfig bridge0 192.168.0.1/24 up
     - ifconfig epair create
@@ -22,6 +20,8 @@ task:
     - ifconfig
     - qjail install
     - qjail create -n lo0 -4 127.0.0.1 jail1
+    - qjail config -v ipfw jail1
+    - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
     - qjail list
     - qjail start jail1
