@@ -8,6 +8,9 @@ task:
   networking_script:
     - sysctl net.inet.ip.forwarding=1
     - sysctl security.jail.allow_raw_sockets=1
+    - sysrc firewall_enable=YES
+    - echo 'firewall_type="open"' >> /etc/rc.conf
+    - kldload ipfw ; sysctl net.inet.ip.fw.enable=0
     - ifconfig bridge create
     - ifconfig bridge0 192.168.0.1/24 up
     - ifconfig epair create
@@ -20,7 +23,6 @@ task:
     - ifconfig
     - qjail install
     - qjail create -n lo0 -4 127.0.0.1 jail1
-    - qjail config -v ipfw jail1
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
     - qjail list
@@ -28,7 +30,6 @@ task:
     - jexec jail1 ifconfig
     - jexec jail1 sysrc firewall_enable=YES
     - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
-    - jexec jail1 echo 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
     - jexec jail1 service ipfw start
     - jexec jail1 ipfw list
     - jexec jail1 route add default 192.168.0.1
