@@ -21,7 +21,7 @@ task:
     - ifconfig bridge0 addm epair0a
   qjail_script:
     - ifconfig
-    - qjail install
+    - qjail install -h ftp3.jp.freebsd.org
     - qjail create -n lo0 -4 127.0.0.1 jail1
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
@@ -32,5 +32,4 @@ task:
     - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
     - jexec jail1 service ipfw start
     - jexec jail1 ipfw list
-    - jexec jail1 route add default 192.168.0.1
     - jexec jail1 pkg install -y git
