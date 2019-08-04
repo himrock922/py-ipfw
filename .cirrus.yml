@@ -10,7 +10,7 @@ task:
   qjail_script:
     - ifconfig
     - qjail install
-    - qjail create -4 192.68.0.2 jail1
+    - qjail create -4 192.168.0.2 jail1
     - qjail config -w vtnet0 -v ipfw jail1
   script:
     - qjail list
