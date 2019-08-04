@@ -20,12 +20,13 @@ task:
     - qjail install
     - qjail create -n lo0 -4 127.0.0.1 jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
-  script:
     - qjail list
     - qjail start jail1
     - jexec jail1 ifconfig
     - jexec jail1 sysrc ipfw_enable=YES
-    - jexec jail1 'firewall_type="open"' >> /etc/rc.conf
-    - jexec jail1 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
+    - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
+    - jexec jail1 echo 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
     - jexec jail1 service ipfw start
     - jexec jail1 ipfw list
+    - jexec jail1 route add default 192.168.0.1
+    - jexec jail1 pkg install -y git
