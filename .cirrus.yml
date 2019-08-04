@@ -8,6 +8,7 @@ task:
   networking_script:
     - sysctl net.inet.ip.forwarding=1
     - sysctl security.jail.allow_raw_sockets=1
+    - sysctl net.inet.ip.fw.enable=0
     - kldload ipfw
     - ifconfig bridge create
     - ifconfig bridge0 192.168.0.1/24 up
