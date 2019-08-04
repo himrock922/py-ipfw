@@ -8,6 +8,7 @@ task:
   networking_script:
     - sysctl net.inet.ip.forwarding=1
     - sysctl security.jail.allow_raw_sockets=1
+    - kldload ipfw
     - ifconfig bridge create
     - ifconfig bridge0 192.168.0.1/24 up
     - ifconfig epair create
@@ -27,7 +28,6 @@ task:
     - jexec jail1 sysrc firewall_enable=YES
     - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
     - jexec jail1 echo 'firewall_script="/etc/rc.firewall"' >> /etc/rc.conf
-    - jexec jail1 kldload ipfw
     - jexec jail1 service ipfw start
     - jexec jail1 ipfw list
     - jexec jail1 route add default 192.168.0.1
