@@ -4,6 +4,7 @@ path                =  "/usr/jails/jail1";
 mount.fstab         =  "/usr/local/etc/qjail.fstab/jail1";
 exec.consolelog     =  "/var/log/qjail.jail1.console.log";
 mount.devfs;
+allow.raw_sockets   =  "1";
 allow.sysvipc       =  "1";
 devfs_ruleset       =  "4";
 vnet                =  "new";
