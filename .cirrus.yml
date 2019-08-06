@@ -31,7 +31,7 @@ task:
     - qjail list
     - qjail start jail1
     - qjail restart jail1
-    - jail exec jail1 csh
+    - jexec jail1 csh
     - ifconfig
     - sysrc firewall_enable=YES
     - echo 'firewall_type="open"' >> /etc/rc.conf
