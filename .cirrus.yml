@@ -6,6 +6,7 @@ task:
     - pkg update
     - pkg install -y qjail
   networking_script:
+    - sysrc gateway_enable=YES
     - sysctl net.inet.ip.forwarding=1
     - sysctl security.jail.allow_raw_sockets=1
     - sysrc firewall_enable=YES
