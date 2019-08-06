@@ -31,16 +31,15 @@ task:
     - qjail list
     - qjail start jail1
     - qjail restart jail1
-    - jexec jail1 csh
-    - ifconfig
-    - sysrc firewall_enable=YES
-    - echo 'firewall_type="open"' >> /etc/rc.conf
-    - service ipfw start
-    - ipfw add 10 allow all from any to any
-    - ipfw list
-    - echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
-    - echo 'nameserver 169.254.169.254' >> /etc/resolv.conf
-    - ifconfig epair0b up
-    - ping -c 4 8.8.8.8
-    - pkg update
-    - pkg install -y git
+    - jexec jail1 ifconfig
+    - jexec jail1 sysrc firewall_enable=YES
+    - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
+    - jexec jail1 service ipfw start
+    - jexec jail1 ipfw add 10 allow all from any to any
+    - jexec jail1 ipfw list
+    - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
+    - jexec jail1 echo 'nameserver 169.254.169.254' >> /etc/resolv.conf
+    - jexec jail1 ifconfig epair0b up
+    - jexec jail1 ping -c 4 8.8.8.8
+    - jexec jail1 pkg update
+    - jexec jail1 pkg install -y git
