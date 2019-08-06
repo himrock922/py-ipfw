@@ -31,9 +31,9 @@ task:
     - qjail list
     - qjail start jail1
     - qjail restart jail1
-    - qjail console jail1
+    - jail exec jail1 csh
     - ifconfig
-    - ysrc firewall_enable=YES
+    - sysrc firewall_enable=YES
     - echo 'firewall_type="open"' >> /etc/rc.conf
     - service ipfw start
     - ipfw add 10 allow all from any to any
