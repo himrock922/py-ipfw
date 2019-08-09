@@ -29,6 +29,7 @@ task:
     - qjail start jail1
     - qjail list
     - jexec jail1 ifconfig
+    - jexec jail1 ping -c 4 8.8.8.8
     - jexec jail1 sysrc firewall_enable=YES
     - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
     - jexec jail1 service ipfw start
@@ -36,9 +37,5 @@ task:
     - jexec jail1 ipfw list
     - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
     - jexec jail1 echo 'nameserver 169.254.169.254' >> /etc/resolv.conf
-    - jexec jail1 netstat -rn
-    - jexec jail1 ping -c 4 192.168.0.1
-    - jexec jail1 traceroute 8.8.8.8
-    - jexec jail1 ping -c 4 8.8.8.8
     - jexec jail1 pkg update
     - jexec jail1 pkg install -y git
