@@ -31,7 +31,6 @@ task:
     - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
     - jexec jail1 echo 'nameserver 169.254.169.254' >> /etc/resolv.conf
     - jexec jail1 cat /etc/resolv.conf
-    - jexec jail1 pkg update
     - jexec jail1 sysrc firewall_enable=YES
     - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
     - jexec jail1 service ipfw start
