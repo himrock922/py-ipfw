@@ -29,7 +29,7 @@ task:
     - qjail start jail1
     - qjail list
     - jexec jail1 ifconfig
-    - jexec jail1 ping -c 4 8.8.8.8
+    - jexec jail1 pkg update
     - jexec jail1 sysrc firewall_enable=YES
     - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
     - jexec jail1 service ipfw start
