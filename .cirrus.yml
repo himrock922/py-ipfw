@@ -27,9 +27,7 @@ task:
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
     - qjail start jail1
-    - qjail list
     - jexec jail1 ifconfig
-    - jexec jail1 ping 10.128.0.50
     - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
     - jexec jail1 echo 'nameserver 169.254.169.254' >> /etc/resolv.conf
     - jexec jail1 cat /etc/resolv.conf
@@ -37,6 +35,7 @@ task:
     - jexec jail1 sysrc firewall_enable=YES
     - jexec jail1 echo 'firewall_type="open"' >> /etc/rc.conf
     - jexec jail1 service ipfw start
+    - jexec jail1 ipfw zero
     - jexec jail1 ipfw add 10 allow all from any to any
     - jexec jail1 ipfw list
     - jexec jail1 pkg update
