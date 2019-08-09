@@ -23,7 +23,7 @@ task:
   qjail_script:
     - ifconfig
     - qjail install -h ftp3.jp.freebsd.org
-    - qjail create jail1
+    - qjail create -n lo0 -4 127.0.0.1 jail1
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
     - qjail start jail1
