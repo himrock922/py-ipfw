@@ -7,7 +7,7 @@ task:
     - pkg install -y qjail
   networking_script:
     - sysrc gateway_enable=YES
-    - sysctl net.inet.ip.forwarding=1
+    - echo 'net.inet.ip.forwarding=1' >> /etc/sysctl.conf
     - sysctl security.jail.allow_raw_sockets=1
     - kldload ipfw ; sysctl net.inet.ip.fw.enable=0
     - ifconfig bridge create
