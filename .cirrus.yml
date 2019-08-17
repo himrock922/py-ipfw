@@ -27,6 +27,7 @@ task:
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
     - qjail start jail1
+    - netstat -rn
     - ping -c 4 192.168.0.2
     - jexec jail1 ifconfig
     - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
