@@ -11,7 +11,7 @@ task:
     - sysctl security.jail.allow_raw_sockets=1
     - kldload ipfw ; sysctl net.inet.ip.fw.enable=0
     - ifconfig bridge create
-    - ifconfig bridge0 192.168.0.1/24 up
+    - ifconfig bridge0 192.168.1.1/24 up
     - ifconfig epair create
     - ifconfig
     - ifconfig epair0a mtu 1460
@@ -19,6 +19,7 @@ task:
     - ifconfig epair0a up
     - ifconfig bridge0 addm vtnet0 addm epair0a
     - cat /etc/resolv.conf
+    - netstat -rn
   qjail_script:
     - ifconfig
     - qjail install -h ftp3.jp.freebsd.org
