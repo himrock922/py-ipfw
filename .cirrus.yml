@@ -16,9 +16,8 @@ task:
     - ifconfig
     - ifconfig epair0a mtu 1460
     - ifconfig epair0b mtu 1460
-    - ifconfig bridge0 addm vtnet0
     - ifconfig epair0a up
-    - ifconfig bridge0 addm epair0a
+    - ifconfig bridge0 addm vtnet0 addm epair0a
     - cat /etc/resolv.conf
   qjail_script:
     - ifconfig
