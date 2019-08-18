@@ -11,7 +11,8 @@ task:
     - sysctl security.jail.allow_raw_sockets=1
     - kldload ipfw ; sysctl net.inet.ip.fw.enable=0
     - ifconfig bridge create
-    - ifconfig bridge0 192.168.0.1/24 up
+    - ifconfig bridge0 192.168.0.1/24
+    - ifconfig bridge0 up
     - ifconfig epair create
     - ifconfig
     - ifconfig epair0a mtu 1460
