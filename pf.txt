@@ -1,0 +1,6 @@
+wan_if="vtnet0"
+jail_subnet = "192.168.0.0/24"
+nat on $wan_if inet from $jail_subnet to ! $jail_subnet -> ($wan_if)
+
+pass proto udp to any port domain keep state
+pass inet proto icmp from any to any

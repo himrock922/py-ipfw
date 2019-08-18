@@ -19,6 +19,10 @@ task:
     - ifconfig epair0a up
     - ifconfig bridge0 addm vtnet0 addm epair0a
     - cat /etc/resolv.conf
+    - sysrc pf_enable=YES
+    - echo 'pf_rules="/etc/pf.conf" >> /etc/rc.conf'
+    - cp pf.txt /etc/pf.conf
+    - service pf restart
     - netstat -rn
   qjail_script:
     - ifconfig
