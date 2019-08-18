@@ -11,28 +11,25 @@ task:
     - sysctl security.jail.allow_raw_sockets=1
     - kldload ipfw ; sysctl net.inet.ip.fw.enable=0
     - ifconfig bridge create
-    - ifconfig bridge0 192.168.0.1/24
-    - ifconfig bridge0 up
+    - ifconfig bridge0 192.168.0.1/24 up
+    - ifconfig epair create
     - ifconfig epair create
     - ifconfig
-    - ifconfig epair0a mtu 1460
-    - ifconfig epair0b mtu 1460
-    - ifconfig epair0a up
-    - ifconfig bridge0 addm epair0a addm vtnet0
+    - ifconfig epair0a 192.168.0.254/24 up
+    - ifconfig epair0b up
+    - ifconfig bridge0 addm epair0b
     - cat /etc/resolv.conf
-    - sysrc pf_enable=YES
-    - echo 'pf_rules="/etc/pf.conf" >> /etc/rc.conf'
-    - cp pf.txt /etc/pf.conf
-    - service pf restart
-    - netstat -rn
   qjail_script:
     - ifconfig
     - qjail install -h ftp3.jp.freebsd.org
     - qjail create -n lo0 -4 127.0.0.1 jail1
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
+    - ifconfig epair1a up
+    - ifconfig bridge0 addm epair1a
     - qjail start jail1
     - netstat -rn
+    - ifconfig
     - ping -c 4 192.168.0.2
     - jexec jail1 ifconfig
     - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
