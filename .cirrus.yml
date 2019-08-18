@@ -25,8 +25,8 @@ task:
     - qjail create -n lo0 -4 127.0.0.1 jail1
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
-    - ifconfig epair1a up
-    - ifconfig bridge0 addm epair1a
+    - ifconfig epair1b up
+    - ifconfig bridge0 addm epair1b
     - qjail start jail1
     - netstat -rn
     - ifconfig
