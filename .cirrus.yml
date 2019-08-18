@@ -18,7 +18,7 @@ task:
     - ifconfig epair0a mtu 1460
     - ifconfig epair0b mtu 1460
     - ifconfig epair0a up
-    - ifconfig bridge0 addm vtnet0 addm epair0a
+    - ifconfig bridge0 addm epair0a addm vtnet0
     - cat /etc/resolv.conf
     - sysrc pf_enable=YES
     - echo 'pf_rules="/etc/pf.conf" >> /etc/rc.conf'
