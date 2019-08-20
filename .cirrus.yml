@@ -6,6 +6,8 @@ task:
     - pkg update
     - pkg install -y qjail
   networking_script:
+    - kldload if_bridge
+    - kldload if_epair
     - kldstat
     - sysrc gateway_enable=YES
     - sysctl net.inet.ip.forwarding=1
