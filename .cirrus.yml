@@ -8,18 +8,17 @@ task:
   networking_script:
     - sysrc gateway_enable=YES
     - sysctl net.inet.ip.forwarding=1
-    - sysctl net.link.ether.bridge=1
+    - sysctl net.link.ether.bridge.enable=1
     - sysctl security.jail.allow_raw_sockets=1
     - kldload ipfw ; sysctl net.inet.ip.fw.enable=0
     - ifconfig bridge create
     - ifconfig bridge0 192.168.0.1/24 up
     - ifconfig epair create
-    - ifconfig epair create
     - ifconfig
-    - ifconfig epair1b mtu 1460
-    - ifconfig epair1a mtu 1460
-    - ifconfig epair1b up
-    - ifconfig bridge0 addm epair1b addm vtnet0
+    - ifconfig epair0b mtu 1460
+    - ifconfig epair0a mtu 1460
+    - ifconfig epair0b up
+    - ifconfig bridge0 addm epair0b addm vtnet0
     - cat /etc/resolv.conf
   qjail_script:
     - ifconfig
