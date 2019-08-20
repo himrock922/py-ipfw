@@ -14,13 +14,12 @@ task:
     - sysctl security.jail.allow_raw_sockets=1
     - kldload ipfw ; sysctl net.inet.ip.fw.enable=0
     - ifconfig bridge create
-    - ifconfig bridge0 192.168.0.1/24 up
     - ifconfig epair create
     - ifconfig
-    - ifconfig epair0b mtu 1460
-    - ifconfig epair0a mtu 1460
+    - ifconfig vtnet0 mtu 1500
     - ifconfig epair0b up
-    - ifconfig bridge0 addm epair0b addm vtnet0
+    - ifconfig bridge0 addm epair0b addm vtnet0 up
+    - ifconfig bridge0 192.168.0.1/24
     - cat /etc/resolv.conf
   qjail_script:
     - ifconfig
