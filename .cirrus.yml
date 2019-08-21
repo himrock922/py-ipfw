@@ -20,7 +20,7 @@ task:
     - ifconfig epair0a mtu 1460
     - ifconfig epair0b mtu 1460
     - ifconfig epair0b up
-    - ifconfig brdige0 192.168.0.1/24
+    - ifconfig bridge0 192.168.0.1/24
     - ifconfig bridge0 addm vtnet0
     - cat /etc/resolv.conf
   qjail_script:
