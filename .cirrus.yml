@@ -9,10 +9,13 @@ task:
     - kldload if_bridge
     - kldload if_epair
     - kldstat
+    - sysctl -a | grep 'bridge'
     - sysrc gateway_enable=YES
     - sysctl net.inet.ip.forwarding=1
     - sysctl security.jail.allow_raw_sockets=1
     - kldload ipfw ; sysctl net.inet.ip.fw.enable=0
+    - sysctl net.link.bridge.pfil_bridge=1
+    - sysctl net.link.bridge.pfil_onlyip=1
     - ifconfig bridge create
     - ifconfig epair create
     - ifconfig
@@ -26,8 +29,6 @@ task:
     - ifconfig
     - qjail install -h ftp3.jp.freebsd.org
     - qjail create -n lo0 -4 127.0.0.1 jail1
-    - ifconfig vtnet0 | grep 'netmask' | awk '{printf $2}' > host_address
-    - cat jail_setting2.txt host_address jail_setting3.txt >> jail_setting.txt
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
     - qjail start jail1
