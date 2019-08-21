@@ -13,8 +13,6 @@ task:
     - sysctl net.inet.ip.forwarding=1
     - sysctl security.jail.allow_raw_sockets=1
     - kldload ipfw ; sysctl net.inet.ip.fw.enable=0
-    - sysctl net.link.ether.ipfw=1
-    - sysctl net.link.bridge.ipfw=1
     - ifconfig bridge create
     - ifconfig epair create
     - ifconfig
