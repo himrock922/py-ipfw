@@ -25,7 +25,6 @@ task:
     - qjail create -n lo0 -4 127.0.0.1 jail1
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
-    - cp jail_local.txt /usr/local/etc/qjail.local/jail1
     - qjail start jail1
     - netstat -rn
     - ifconfig
