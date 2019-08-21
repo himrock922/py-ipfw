@@ -16,11 +16,11 @@ task:
     - ifconfig bridge create
     - ifconfig epair create
     - ifconfig
+    - ifconfig bridge0 192.168.0.1/24
     - ifconfig bridge0 mtu 1460
     - ifconfig epair0a mtu 1460
     - ifconfig epair0b mtu 1460
     - ifconfig epair0b up
-    - ifconfig bridge0 192.168.0.1/24
     - ifconfig bridge0 addm vtnet0
     - cat /etc/resolv.conf
   qjail_script:
@@ -45,4 +45,5 @@ task:
     - jexec jail1 ipfw add 10 allow all from any to any
     - jexec jail1 ipfw list
     - jexec jail1 pkg update
+    - jexec jail1 ping -c 4 192.168.0.1
     - jexec jail1 pkg install -y git
