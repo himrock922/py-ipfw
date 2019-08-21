@@ -16,7 +16,7 @@ task:
     - ifconfig bridge create
     - ifconfig epair create
     - ifconfig
-    - ifconfig bridge mtu 1460
+    - ifconfig bridge0 mtu 1460
     - ifconfig epair0a mtu 1460
     - ifconfig epair0b mtu 1460
     - ifconfig epair0b up
@@ -32,7 +32,6 @@ task:
     - qjail start jail1
     - netstat -rn
     - ifconfig
-    - ping -c 4 192.168.0.2
     - jexec jail1 ifconfig
     - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
     - jexec jail1 echo 'nameserver 169.254.169.254' >> /etc/resolv.conf
