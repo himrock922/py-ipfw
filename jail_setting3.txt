@@ -1,0 +1,5 @@
+ 192.168.0.1";
+exec.start  += "/bin/echo "epair0a" > /etc/epair";
+exec.start  += "/bin/sh /etc/rc";
+exec.stop    = "/bin/sh /etc/rc.shutdown";
+}
