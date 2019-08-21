@@ -23,7 +23,7 @@ task:
     - ifconfig epair0b mtu 1460
     - ifconfig epair0b up
     - ifconfig brdige0 192.168.0.1/24
-    - ifconfig bridge0 addm epair0b up
+    - ifconfig bridge0 addm vtnet0
     - cat /etc/resolv.conf
   qjail_script:
     - ifconfig
@@ -33,6 +33,8 @@ task:
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
     - qjail start jail1
     - netstat -rn
+    - ifconfig bridge0 addm epair0b
+    - ifconfig bridge0 up
     - ifconfig
     - jexec jail1 ifconfig
     - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
