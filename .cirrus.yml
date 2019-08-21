@@ -26,7 +26,7 @@ task:
     - ifconfig
     - qjail install -h ftp3.jp.freebsd.org
     - qjail create -n lo0 -4 127.0.0.1 jail1
-    - ifconfig vtnet0 | grep 'inet' | awk '{printf $2}' > host_address
+    - ifconfig vtnet0 | grep -E \(inet\) | awk '{printf $2}' > host_address > host_address
     - cat jail_setting2.txt host_address jail_setting3.txt >> jail_setting.txt
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
