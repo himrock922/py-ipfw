@@ -6,10 +6,6 @@ task:
     - pkg update
     - pkg install -y qjail
   networking_script:
-    - kldload if_bridge
-    - kldload if_epair
-    - kldstat
-    - sysctl -a | grep 'bridge'
     - sysrc gateway_enable=YES
     - sysctl net.inet.ip.forwarding=1
     - sysctl security.jail.allow_raw_sockets=1
@@ -21,7 +17,7 @@ task:
     - ifconfig bridge0 mtu 1460
     - ifconfig epair0a mtu 1460
     - ifconfig epair0b mtu 1460
-    - ifconfig bridge0 addm vtnet0
+    - ifconfig bridge0 addm vtnet0 addm epair0b up
     - cat /etc/resolv.conf
   qjail_script:
     - ifconfig
@@ -32,8 +28,6 @@ task:
     - cp jail_local.txt /usr/local/etc/qjail.local/jail1
     - qjail start jail1
     - netstat -rn
-    - ifconfig bridge0 addm epair0b
-    - ifconfig bridge0 up
     - ifconfig
     - jexec jail1 ifconfig
     - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
@@ -46,7 +40,6 @@ task:
     - jexec jail1 ipfw add 10 allow all from any to any
     - jexec jail1 ipfw list
     - jexec jail1 sysctl -a | grep 'bridge'
-    - jexec jail1 sysctl net.link.bridge.ipfw=1
     - jexec jail1 netstat -rn
     - jexec jail1 pkg update
     - jexec jail1 pkg install -y git

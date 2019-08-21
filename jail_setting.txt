@@ -7,7 +7,7 @@ mount.devfs;
 allow.raw_sockets   =  "1";
 allow.sysvipc       =  "1";
 devfs_ruleset       =  "4";
-vnet                =  "new";
+vnet;
 vnet.interface      =  "epair0a";
 exec.start   = "ifconfig epair0a 192.168.0.2 netmask 255.255.255.0";
 exec.start  += "route add default 192.168.0.1";
