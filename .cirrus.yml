@@ -16,7 +16,9 @@ task:
     - ifconfig bridge create
     - ifconfig epair create
     - ifconfig
-    - ifconfig vtnet0 mtu 1500
+    - ifconfig bridge mtu 1460
+    - ifconfig epair0a mtu 1460
+    - ifconfig epair0b mtu 1460
     - ifconfig epair0b up
     - ifconfig bridge0 addm epair0b addm vtnet0 up
     - ifconfig bridge0 192.168.0.1/24
