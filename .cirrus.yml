@@ -14,8 +14,6 @@ task:
     - sysctl net.inet.ip.forwarding=1
     - sysctl security.jail.allow_raw_sockets=1
     - kldload ipfw ; sysctl net.inet.ip.fw.enable=0
-    - sysctl net.link.bridge.pfil_bridge=1
-    - sysctl net.link.bridge.pfil_onlyip=1
     - ifconfig bridge create
     - ifconfig epair create
     - ifconfig
@@ -46,6 +44,8 @@ task:
     - jexec jail1 ipfw zero
     - jexec jail1 ipfw add 10 allow all from any to any
     - jexec jail1 ipfw list
+    - jexec jail1 sysctl -a | grep 'bridge'
+    - jexec jail1 net.link.bridge.ipfw = 1
     - jexec jail1 netstat -rn
     - jexec jail1 pkg update
     - jexec jail1 pkg install -y git
