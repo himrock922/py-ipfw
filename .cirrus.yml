@@ -26,6 +26,7 @@ task:
     - cat /usr/local/etc/qjail.config/jail1
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
     - qjail start jail1
+    - service routing restart
     - netstat -rn
     - ifconfig
     - jexec jail1 ifconfig
