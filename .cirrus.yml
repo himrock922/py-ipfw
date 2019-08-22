@@ -29,6 +29,7 @@ task:
     - ifconfig
     - netstat -rn
     - ifconfig epair0b inet -alias 0.0.0.0
+    - ifconfig bridge0 inet -alias 0.0.0.0
     - ifconfig
     - netstat -rn
     - jexec jail1 ifconfig
