@@ -27,7 +27,8 @@ task:
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
     - qjail start jail1
     - netstat -rn
-    - route delete -net 0.0.0.0/8
+    - ifconfig bridge0 inet -alias 0.0.0.0
+    - ifconfig epair0b inet -alias 0.0.0.0
     - ifconfig
     - jexec jail1 ifconfig
     - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
