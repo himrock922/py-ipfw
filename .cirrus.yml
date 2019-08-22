@@ -30,6 +30,7 @@ task:
     - ifconfig bridge0 inet -alias 0.0.0.0
     - ifconfig epair0b inet -alias 0.0.0.0
     - ifconfig
+    - netstat -rn
     - jexec jail1 ifconfig
     - jexec jail1 echo 'search c.cirrus-ci-community.internal google.internal' > /etc/resolv.conf
     - jexec jail1 echo 'nameserver 169.254.169.254' >> /etc/resolv.conf
