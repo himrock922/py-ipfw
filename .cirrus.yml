@@ -27,7 +27,6 @@ task:
     - cp jail_setting.txt /usr/local/etc/qjail.config/jail1
     - qjail start jail1
     - netstat -rn
-    - ifconfig bridge0 inet -alias 0.0.0.0
     - ifconfig epair0b inet -alias 0.0.0.0
     - ifconfig
     - netstat -rn
