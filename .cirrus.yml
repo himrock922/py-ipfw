@@ -13,11 +13,11 @@ task:
     - ifconfig bridge create
     - ifconfig epair create
     - ifconfig
-    - ifconfig bridge0 192.168.0.1/24
-    - ifconfig bridge0 mtu 1460
+    - ifconfig bridge0 192.168.0.1/24 up
     - ifconfig epair0a mtu 1460
     - ifconfig epair0b mtu 1460
-    - ifconfig bridge0 addm vtnet0 addm epair0b up
+    - ifconfig epair0b up
+    - ifconfig bridge0 addm vtnet0 addm epair0b
     - cat /etc/resolv.conf
   qjail_script:
     - ifconfig
@@ -28,7 +28,6 @@ task:
     - qjail start jail1
     - ifconfig
     - netstat -rn
-    - ifconfig bridge0 inet -alias 0.0.0.0
     - ifconfig epair0b inet -alias 0.0.0.0
     - ifconfig
     - netstat -rn
